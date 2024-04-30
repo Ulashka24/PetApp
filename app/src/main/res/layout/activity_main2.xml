@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/second_screen" />
 
     <TextView
-        android:id="@+id/Happy"
+        android:id="@+id/happy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Happiness:"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.172" />
 
     <TextView
-        android:id="@+id/Clean"
+        android:id="@+id/clean"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cleanliness:"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <TextView
-        android:id="@+id/Hunger"
+        android:id="@+id/hunger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hunger:"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Hunger"
+        app:layout_constraintTop_toBottomOf="@+id/hunger"
         app:layout_constraintVertical_bias="0.057" />
 
     <Button

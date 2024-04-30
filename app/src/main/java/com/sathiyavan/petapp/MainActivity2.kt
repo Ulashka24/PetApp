@@ -3,9 +3,9 @@ package com.sathiyavan.petapp
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 
 
 class MainActivity2 : AppCompatActivity() {
@@ -14,90 +14,85 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var buttonFeed: button
     private lateinit var buttonBath: button
     private lateinit var imageViewPet: ImageView
-    class myPet(var myPet: String){
+    class myPet(var myPet: String) {
     }
+    private var happiness:Int =100
+    private var cleanliness: Int = 100
+    private var hungry: Int= 0
 
-    private var Happiness = 100
-    private var Cleanliness = 100
-    private var Hunger = 0
 
-    @SuppressLint("MissingInflatedId", "ResourceType")
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
         //Initializing variables
-        buttonPlay= findViewById<button>(R.id.buttonPlay)
-        buttonFeed= findViewById<button>(R.id.buttonFeed)
-        buttonBath= findViewById<button>(R.id.buttonBath)
-
+        val buttonPlay= findViewById<Button>(R.id.buttonPlay)
+        val buttonFeed= findViewById<Button>(R.id.buttonFeed)
+        val buttonBath= findViewById<Button>(R.id.buttonBath)
         imageViewPet= findViewById(R.id.imageViewPet)
 
-        //set image
-        imageViewPet.setImageResource(R.drawable.eating)
-        //set button
-        buttonFeed.setOnClickListener {
-            if(imageViewPet){
-                imageViewPet.setImageResource(R.drawable.eating)
-            }else{
-                imageViewPet.setImageResource(R.id.imageViewPet)
-            }
-        }
-        imageViewPet.setImageResource(R.drawable.bathing)
-        buttonBath.setOnClickListener {
-            if (imageViewPet){
-                imageViewPet.setImageResource(R.drawable.bathing)
-            }else{
-                imageViewPet.setImageResource(R.id.imageViewPet)
-            }
-        }
-        imageViewPet.setImageResource(R.drawable.playing)
+        //Linking the images to the correct buttons
+        //initializing the buttons with setOnClickListener
+        updateUI()
         buttonPlay.setOnClickListener {
-            if (imageViewPet) {
-                imageViewPet.setImageResource(R.drawable.playing)
-            }else{
-                imageViewPet.setImageResource(R.id.imageViewPet)
-            }
+            playWithPet()
+            updateUI()
+            imageViewPet.setImageResource(R.drawable.playing)
         }
-        //feed
-        fun Feed(){
-            Hunger = 10
-            if(Hunger<0) Hunger=0
-            Happiness += 5
-            Cleanliness-= 3
+        buttonBath.setOnClickListener {
+            bathPet()
+            updateUI()
+            imageViewPet.setImageResource(R.drawable.bathing)
         }
-        //play
-        fun Play(){
-            Happiness+= 10
-            if (Happiness>100)Happiness=100
-            Hunger +=5
-            if (Hunger>100)Hunger=100
-            Cleanliness-= 5
-            if(Cleanliness<0)Cleanliness=0
+        buttonFeed.setOnClickListener {
+            feedPet()
+            updateUI()
+            imageViewPet.setImageResource(R.drawable.eating)
         }
-        //Clean
-        fun Clean (){
-            Cleanliness=100
-            Happiness-=5
-            if(Happiness<0)Happiness=0
-        }
-
-        fun printIn(Hunger: String) {
 
         }
 
-        fun printin(Clean: String) {
+    //feeding the pet status
+        private fun feedPet(){
+            hungry += 10
+            if(hungry>100) hungry=100
+            happiness += 5
+            cleanliness-= 5
 
         }
-
-        //Print pets status
-        fun checkStatus(){
-            printIn("Hunger:$Hunger")
-            printIn("Happiness:$Happiness")
-            printin("Cleanliness:$Cleanliness")
+        //playing with the pet status
+        private fun playWithPet(){
+            happiness+= 10
+            if (happiness>100)happiness=100
+            hungry -=5
+            if (hungry>100)hungry=100
+            cleanliness-= 5
+            if(cleanliness<0)cleanliness=0
         }
+        //Cleaning the pet status
+        private fun bathPet(){
+            cleanliness=100
+            happiness-=5
+            if(happiness<0)happiness=0
+        }
+    private fun updateUI(){
+        val happy= findViewById<TextView>(R.id.happy)
+        val clean= findViewById<TextView>(R.id.clean)
+        val hunger= findViewById<TextView>(R.id.hunger)
+
+        happy.text ="Happy:$happiness"
+        clean.text ="Clean:$cleanliness"
+        hunger.text ="Hunger:$hungry"
+    }
+
 
 
     }
 
-}
+
+
+
+
+
